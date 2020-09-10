@@ -4,7 +4,7 @@ import CompanyAccountsController from './controllers/CompanyAccountsController';
 import CompanyLocationsController from './controllers/CompanyLocationsController';
 
 import UserAccountsController from './controllers/UserAccountsController';
-import UsersController from './controllers/usersController'
+import UsersController from './controllers/UsersController';
 
 const routes = express.Router();
 
