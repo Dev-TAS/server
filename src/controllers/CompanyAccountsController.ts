@@ -21,7 +21,7 @@ export default class CompaniesController {
     
       await trx.commit();
     
-      return response.status(201).send();
+      return response.status(201).send(true);
   
     } catch(e) {
       await trx.rollback();
@@ -38,9 +38,9 @@ export default class CompaniesController {
 
     const logIn = filter.logIn as string || null;
     const email = filter.email as string || null;
-    const password = filter.password as string;
+    const password = filter.password as string || null;
 
-    if ( logIn !== null && email === null ) {
+    if ( logIn !== null && email === null && password !== null) {
       const returnAccount = await db('companyAccounts')
       .where('companyAccounts.logIn', '=', logIn);
 
@@ -55,6 +55,46 @@ export default class CompaniesController {
         return response.json(false);
 
       }
+
+    } else if ( logIn === null && email !== null && password !== null) {
+      const returnAccount = await db('companyAccounts')
+      .where('companyAccounts.email', '=', email);
+
+      const account = returnAccount[0]
+
+      if (account !== undefined && account.password === password) {
+
+        return response.json([true, account.id])
+
+      } else {
+
+        return response.json(false);
+
+      }
+    } else if ( logIn !== null && email === null && password === null ) {
+      const returnAccount = await db('companyAccounts')
+      .where('companyAccounts.logIn', '=', logIn)
+
+      const account = returnAccount[0]
+
+      if(account !== undefined) {
+        return response.json(1)
+      } else {
+        return response.json(0)
+      }
+    } else if ( logIn === null && email !== null && password === null ) {
+      const returnAccount = await db('companyAccounts')
+      .where('companyAccounts.email', '=', email)
+
+      const account = returnAccount[0]
+
+      if(account !== undefined) {
+        return response.json(1)
+      } else {
+        return response.json(0)
+      }
+    } else {
+      return response.json(false)
     }
   }
 };

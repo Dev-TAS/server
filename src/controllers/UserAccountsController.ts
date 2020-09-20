@@ -38,9 +38,9 @@ export default class CompaniesController {
 
     const logIn = filter.logIn as string || null;
     const email = filter.email as string || null;
-    const password = filter.password as string;
+    const password = filter.password as string || null;
 
-    if ( logIn !== null && email === null ) {
+    if ( logIn !== null && email === null && password !== null) {
       const returnAccount = await db('userAccounts')
       .where('userAccounts.logIn', '=', logIn);
 
@@ -56,7 +56,7 @@ export default class CompaniesController {
 
       }
 
-    } else if ( logIn === null && email !== null ) {
+    } else if ( logIn === null && email !== null && password !== null) {
       const returnAccount = await db('userAccounts')
       .where('userAccounts.email', '=', email);
 
@@ -71,6 +71,30 @@ export default class CompaniesController {
         return response.json(false);
 
       }
+    } else if ( logIn !== null && email === null && password === null ) {
+      const returnAccount = await db('userAccounts')
+      .where('userAccounts.logIn', '=', logIn)
+
+      const account = returnAccount[0]
+
+      if(account !== undefined) {
+        return response.json(1)
+      } else {
+        return response.json(0)
+      }
+    } else if ( logIn === null && email !== null && password === null ) {
+      const returnAccount = await db('userAccounts')
+      .where('userAccounts.email', '=', email)
+
+      const account = returnAccount[0]
+
+      if(account !== undefined) {
+        return response.json(1)
+      } else {
+        return response.json(0)
+      }
+    } else {
+      return response.json(false)
     }
   }
 };

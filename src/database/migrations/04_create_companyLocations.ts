@@ -5,11 +5,11 @@ export async function up(knex: Knex) {
     table.increments('id').primary();
     table.string('phone');
     table.string('whatsapp');
-    table.string('serviceType');
-    table.string('state');
-    table.string('city');
-    table.string('neighborhood');
-    table.string('localNumber');
+    table.string('serviceType').notNullable();
+    table.string('state').notNullable();
+    table.string('city').notNullable();
+    table.string('neighborhood').notNullable();
+    table.string('localNumber').notNullable();
     table.string('latitude');
     table.string('longitude');
 
