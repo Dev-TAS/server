@@ -11,11 +11,13 @@ export default class LocalsController {
       state,
       city,
       neighborhood,
+      street,
       localNumber,
       company_id,
       company_name,
       latitude,
-      longitude
+      longitude,
+      title
     } = request.body;
 
 
@@ -29,11 +31,13 @@ export default class LocalsController {
         state,
         city,
         neighborhood,
+        street,
         localNumber,
         company_id,
         company_name,
         latitude,
-        longitude
+        longitude,
+        title
       })
 
       await trx.commit();
@@ -55,8 +59,9 @@ export default class LocalsController {
 
     const state = filter.state as string || null;
     const city = filter.city as string || null;
+    const company_id = filter.company_id as string || null;
 
-    if ( state !== null && city !== null) {
+    if ( state !== null && city !== null && company_id === null) {
       const locations = await db('companyLocations')
       .where('companyLocations.state', '=', state)
       .andWhere('companyLocations.city', '=', city);
@@ -64,14 +69,20 @@ export default class LocalsController {
       return response.send(locations);
     }
 
-    else if (state !== null && city === null) {
+    else if (state !== null && city === null && company_id === null) {
       const locations = await db('companyLocations')
       .where('companyLocations.state', '=', state);
 
       return response.send(locations);
     }
 
-    else if (state === null) {
+    else if (state === null && city === null && company_id !== null) {
+      const locations = await db('companyLocations')
+      .where('companyLocations.company_id', '=', company_id);
+
+      return response.send(locations);
+
+    } else if (state === null && city === null && company_id === null) {
       return response.send(false);
     }
   }

@@ -9,9 +9,11 @@ export async function up(knex: Knex) {
     table.string('state').notNullable();
     table.string('city').notNullable();
     table.string('neighborhood').notNullable();
+    table.string('street').notNullable();
     table.string('localNumber').notNullable();
-    table.string('latitude');
-    table.string('longitude');
+    table.integer('latitude');
+    table.integer('longitude');
+    table.string('title');
 
     table.integer('company_id')
     .notNullable()

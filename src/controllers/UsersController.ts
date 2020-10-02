@@ -46,9 +46,9 @@ export default class UsersController {
 
     const account_id = filter.account_id as string;
 
-    const company = await db('users')
+    const user = await db('users')
     .where('users.account_id', '=', account_id);
 
-    return response.send(company);
+    return response.send(user);
   }
-}
+};

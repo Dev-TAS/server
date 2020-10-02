@@ -15,8 +15,6 @@ const companyLocationsController = new CompanyLocationsController();
 const userAccountsController = new UserAccountsController();
 const usersController = new UsersController();
 
-
-
 routes.post('/companyAccounts', companyAccountsController.create);
 routes.get('/companyAccounts', companyAccountsController.index);
 
