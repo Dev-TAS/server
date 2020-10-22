@@ -51,4 +51,42 @@ export default class UsersController {
 
     return response.send(user);
   }
+
+  async update(request: Request, response: Response) {
+    const {
+      name,
+      email,
+      phone,
+      whatsapp,
+      state,
+      city,
+      avatar,
+      account_id
+    } = request.body;
+
+    const trx = await db.transaction();
+
+    try {
+      await trx('users').where('account_id', '=', account_id)
+      .update({
+        name,
+        email,
+        phone,
+        whatsapp,
+        state,
+        city,
+        avatar
+      })
+
+      await trx.commit();
+
+      return response.status(201).send('Informações salvas com sucesso!');
+    } catch {
+      await trx.rollback();
+
+      return response.status(400).json({
+        error: 'Erro ao atualizar informações'
+      })
+    }
+  }
 };

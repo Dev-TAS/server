@@ -20,6 +20,7 @@ routes.get('/companyAccounts', companyAccountsController.index);
 
 routes.post('/companies', companiesController.create);
 routes.get('/companies', companiesController.index);
+routes.put('/companies', companiesController.update);
 
 routes.post('/companyLocations', companyLocationsController.create);
 routes.get('/companyLocations', companyLocationsController.index);
@@ -31,5 +32,6 @@ routes.get('/userAccounts', userAccountsController.index);
 
 routes.post('/users', usersController.create);
 routes.get('/users', usersController.index);
+routes.put('/users', usersController.update);
 
 export default routes;

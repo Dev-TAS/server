@@ -53,4 +53,42 @@ export default class CompaniesController {
 
     return response.send(company);
   }
+
+  async update(request: Request, response: Response) {
+    const {
+      name,
+      cnpj,
+      email,
+      phone,
+      whatsapp,
+      avatar,
+      bio,
+      account_id
+    } = request.body;
+
+    const trx = await db.transaction();
+
+    try {
+      await trx('companies').where('account_id', '=', account_id)
+      .update({
+        name,
+        cnpj,
+        email,
+        phone,
+        whatsapp,
+        avatar,
+        bio,
+      })
+
+      await trx.commit();
+
+      return response.status(201).send('Informações salvas com sucesso!');
+    } catch {
+      await trx.rollback();
+
+      return response.status(400).json({
+        error: 'Erro ao atualizar informações'
+      })
+    }
+  }
 };
