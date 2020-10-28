@@ -12,7 +12,8 @@ export default class UsersController {
       state,
       city,
       avatar,
-      account_id
+      account_id,
+      points
     } = request.body;
 
     const trx = await db.transaction();
@@ -26,7 +27,8 @@ export default class UsersController {
       state,
       city,
       avatar,
-      account_id
+      account_id,
+      points
       })
 
       await trx.commit();
@@ -61,7 +63,8 @@ export default class UsersController {
       state,
       city,
       avatar,
-      account_id
+      account_id,
+      points
     } = request.body;
 
     const trx = await db.transaction();
@@ -75,7 +78,8 @@ export default class UsersController {
         whatsapp,
         state,
         city,
-        avatar
+        avatar,
+        points
       })
 
       await trx.commit();

@@ -10,6 +10,7 @@ export async function up(knex: Knex) {
     table.string('state');
     table.string('city');
     table.string('avatar');
+    table.double('points').notNullable();
 
     table.integer('account_id')
     .notNullable()

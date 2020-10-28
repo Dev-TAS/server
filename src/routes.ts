@@ -2,6 +2,7 @@ import express from 'express'
 import CompaniesController from './controllers/CompaniesController';
 import CompanyAccountsController from './controllers/CompanyAccountsController';
 import CompanyLocationsController from './controllers/CompanyLocationsController';
+import CouponsController from './controllers/CouponsController';
 
 import UserAccountsController from './controllers/UserAccountsController';
 import UsersController from './controllers/UsersController';
@@ -14,6 +15,8 @@ const companyLocationsController = new CompanyLocationsController();
 
 const userAccountsController = new UserAccountsController();
 const usersController = new UsersController();
+
+const couponsController = new CouponsController();
 
 routes.post('/companyAccounts', companyAccountsController.create);
 routes.get('/companyAccounts', companyAccountsController.index);
@@ -33,5 +36,10 @@ routes.get('/userAccounts', userAccountsController.index);
 routes.post('/users', usersController.create);
 routes.get('/users', usersController.index);
 routes.put('/users', usersController.update);
+
+/*-------------------------------------------------------------------------------*/
+
+routes.post('/coupons', couponsController.create);
+routes.get('/coupons', couponsController.index);
 
 export default routes;
