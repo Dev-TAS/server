@@ -6,7 +6,6 @@ export default class CompaniesController {
   async create(request: Request, response: Response) {
     const {
       name,
-      cnpj,
       email,
       phone,
       whatsapp,
@@ -20,7 +19,6 @@ export default class CompaniesController {
     try {
       await trx('companies').insert({
         name,
-        cnpj,
         email,
         phone,
         whatsapp,
@@ -57,7 +55,6 @@ export default class CompaniesController {
   async update(request: Request, response: Response) {
     const {
       name,
-      cnpj,
       email,
       phone,
       whatsapp,
@@ -72,7 +69,6 @@ export default class CompaniesController {
       await trx('companies').where('account_id', '=', account_id)
       .update({
         name,
-        cnpj,
         email,
         phone,
         whatsapp,

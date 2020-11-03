@@ -4,7 +4,6 @@ export async function up(knex: Knex) {
   return knex.schema.createTable('companies', (table) => {
     table.increments('id').primary();
     table.string('name').notNullable();
-    table.string('cnpj').notNullable();
     table.string('email');
     table.string('phone');
     table.string('whatsapp');

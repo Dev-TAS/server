@@ -5,7 +5,7 @@ import db from "../database/connection";
 export default class CompaniesController {
   async create(request: Request, response: Response) {
     const {
-     logIn,
+     cpfOrCnpj,
      email,
      password
     } = request.body;
@@ -14,7 +14,7 @@ export default class CompaniesController {
   
     try {
       await trx('companyAccounts').insert({
-        logIn,
+        cpfOrCnpj,
         email,
         password
       })
@@ -36,13 +36,13 @@ export default class CompaniesController {
   async index(request: Request, response: Response) {
     const filter = request.query;
 
-    const logIn = filter.logIn as string || null;
+    const cpfOrCnpj = filter.cpfOrCnpj as string || null;
     const email = filter.email as string || null;
     const password = filter.password as string || null;
 
-    if ( logIn !== null && email === null && password !== null) {
+    if ( cpfOrCnpj !== null && email === null && password !== null) {
       const returnAccount = await db('companyAccounts')
-      .where('companyAccounts.logIn', '=', logIn);
+      .where('companyAccounts.cpfOrCnpj', '=', cpfOrCnpj);
 
       const account = returnAccount[0]
 
@@ -56,7 +56,7 @@ export default class CompaniesController {
 
       }
 
-    } else if ( logIn === null && email !== null && password !== null) {
+    } else if ( cpfOrCnpj === null && email !== null && password !== null) {
       const returnAccount = await db('companyAccounts')
       .where('companyAccounts.email', '=', email);
 
@@ -71,9 +71,9 @@ export default class CompaniesController {
         return response.json(false);
 
       }
-    } else if ( logIn !== null && email === null && password === null ) {
+    } else if ( cpfOrCnpj !== null && email === null && password === null ) {
       const returnAccount = await db('companyAccounts')
-      .where('companyAccounts.logIn', '=', logIn)
+      .where('companyAccounts.cpfOrCnpj', '=', cpfOrCnpj)
 
       const account = returnAccount[0]
 
@@ -82,7 +82,7 @@ export default class CompaniesController {
       } else {
         return response.json(0)
       }
-    } else if ( logIn === null && email !== null && password === null ) {
+    } else if ( cpfOrCnpj === null && email !== null && password === null ) {
       const returnAccount = await db('companyAccounts')
       .where('companyAccounts.email', '=', email)
 
