@@ -21,13 +21,6 @@ export async function up(knex: Knex) {
     .inTable('companies')
     .onUpdate('CASCADE')
     .onDelete('CASCADE');
-
-    table.integer('company_name')
-    .notNullable()
-    .references('name')
-    .inTable('companies')
-    .onUpdate('CASCADE')
-    .onDelete('CASCADE');
   })
 }
 
