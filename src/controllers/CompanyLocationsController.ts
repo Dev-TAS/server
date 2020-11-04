@@ -14,7 +14,6 @@ export default class LocalsController {
       street,
       localNumber,
       company_id,
-      company_name,
       latitude,
       longitude,
       title
@@ -34,7 +33,6 @@ export default class LocalsController {
         street,
         localNumber,
         company_id,
-        company_name,
         latitude,
         longitude,
         title
