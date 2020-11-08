@@ -11,8 +11,8 @@ export async function up(knex: Knex) {
     table.string('neighborhood').notNullable();
     table.string('street').notNullable();
     table.string('localNumber').notNullable();
-    table.integer('latitude');
-    table.integer('longitude');
+    table.string('latitude');
+    table.string('longitude');
     table.string('title');
 
     table.integer('company_id')
