@@ -61,15 +61,15 @@ export default class LocalsController {
 
     if ( state !== null && city !== null && company_id === null) {
       const locations = await db('companyLocations')
-      .where('companyLocations.state', '=', state)
-      .andWhere('companyLocations.city', '=', city);
+      .where('companyLocations.state', 'LIKE', state + '%')
+      .andWhere('companyLocations.city', 'LIKE', city + '%');
 
       return response.send(locations);
     }
 
     else if (state !== null && city === null && company_id === null) {
       const locations = await db('companyLocations')
-      .where('companyLocations.state', '=', state);
+      .where('companyLocations.state', 'LIKE', state + '%');
 
       return response.send(locations);
     }
