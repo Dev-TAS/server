@@ -45,11 +45,22 @@ export default class CompaniesController {
     const filter = request.query;
 
     const account_id = filter.account_id as string;
+    const id = filter.id as string;
 
-    const company = await db('companies')
-    .where('companies.account_id', '=', account_id);
+    console.log(id)
+    
+    if(account_id !== undefined && id === undefined) {
+      const company = await db('companies')
+      .where('companies.account_id', '=', account_id);
+      
+      return response.send(company);
 
-    return response.send(company);
+    } else if (account_id === undefined && id !== undefined) {
+      const company = await db('companies')
+      .where('companies.id', '=', id);
+      
+      return response.send(company);
+    }
   }
 
   async update(request: Request, response: Response) {
